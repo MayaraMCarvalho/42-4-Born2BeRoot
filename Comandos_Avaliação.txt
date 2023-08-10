@@ -1,0 +1,57 @@
+
+less /etc/passwd | cut -d ":" -f 1 - mostra a lista de todos os usuários do computador;
+
+users - mostra a lista de todos os usuários que estão logados atualmente;
+
+useradd <username> - cria um novo usuário com o diretório home;
+
+usermod <username> - modifica as configurações de usuário, -l para username, -c para 
+cometário ou nome completo e -g para GID
+
+
+userdel -r <username> - deleta o usuário e todos os arquivos associados a ele.
+
+id -u <username> - mostra o id do usuário.
+
+
+
+groups <username> - mostra grupos do usuário;
+
+groupadd <groupname> - cria novo grupo;
+
+groupdel <groupname> -deleta grupo;
+
+gpasswd -a <username> <groupname> - adiciona usuário ao grupo;
+
+gpasswd -d <username> <groupname> - remove usuário do grupo;
+
+getent group <groupname> - mostra usuários no grupo;
+
+id -g <username> - show user's main group GID.
+
+
+
+Politica de senhas
+
+users
+sudo awk -F":" '{print $1 " "}' /etc/passwd
+sudo awk -F":" '{print $1 " "}' /etc/group
+adduser ddiniz42
+
+# menos 10 char: Teste42
+# s/ digito:     TesteSchool
+# s/ Upper:      teste42school
+# s/ Lower:      TESTE42SCHOOL
+# c/ user:       ddiniz42School
+# c/ repeat:     aaaaTeste42school
+# valida:        Teste42school
+
+su ddiniz42
+passwd ddiniz42
+
+groupadd user43
+gpasswd -a ddiniz42 sudo && gpasswd -a ddiniz42 user43
+groups ddiniz42
+userdel -r ddiniz42
+groupdel user43
+
